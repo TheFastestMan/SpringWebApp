@@ -1,10 +1,16 @@
 package ru.rail.springwebapp.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
-@Data
 @Table(name = "users")
 public class User {
 
@@ -14,12 +20,17 @@ public class User {
 
     private String username;
 
-    private String password;
+    private LocalDate birthDate;
 
-    private String email;
-    private String role;
+    private String firstname;
 
-    public User() {
+    private String lastname;
 
-    }
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
+
 }

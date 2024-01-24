@@ -4,7 +4,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.rail.springwebapp.dto.UserDTO;
+import ru.rail.springwebapp.dto.LoginDto;
+import ru.rail.springwebapp.dto.UserCreateEditDto;
+import ru.rail.springwebapp.dto.UserReadDto;
 import ru.rail.springwebapp.entity.User;
 import ru.rail.springwebapp.repository.UserRepository;
 
@@ -25,53 +27,63 @@ public class UserService {
         this.modelMapper = modelMapper;
     }
 
-    private UserDTO convertUserToUserDTO(User user) {
-        UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+    private UserCreateEditDto convertUserToUserDTO(User user) {
+        UserCreateEditDto userDTO = modelMapper.map(user, UserCreateEditDto.class);
         userDTO.setUsername(user.getUsername());
-        userDTO.setPassword(user.getPassword());
-        userDTO.setEmail(user.getEmail());
+        userDTO.setBirthDate(user.getBirthDate());
+        userDTO.setFirstname(user.getFirstname());
+        userDTO.setLastname(user.getLastname());
+        userDTO.setRole(user.getRole());
+        userDTO.setCompanyId(user.getCompany().getId());
+        return userDTO;
+    }
+
+    private UserReadDto convertUserToUserDTO2(User user) {
+        UserReadDto userDTO = modelMapper.map(user, UserReadDto.class);
+        userDTO.setUsername(user.getUsername());
+        userDTO.setBirthDate(user.getBirthDate());
+        userDTO.setFirstname(user.getFirstname());
+        userDTO.setLastname(user.getLastname());
         userDTO.setRole(user.getRole());
         return userDTO;
     }
 
-    public List<UserDTO> findAll() {
+    public List<UserReadDto> findAll() {
         return userRepository.findAll().stream()
-                .map(user -> UserDTO.builder()
+                .map(user -> UserReadDto.builder()
                         .id(user.getId())
                         .username(user.getUsername())
-                        .password(user.getPassword())
-                        .email(user.getEmail())
+                        .birthDate(user.getBirthDate())
+                        .firstname(user.getFirstname())
+                        .lastname(user.getLastname())
                         .role(user.getRole())
                         .build())
                 .collect(Collectors.toList());
 
     }
 
-    public Optional<UserDTO> login(String email, String password) {
-        return userRepository.findByEmailAndPassword(email, password)
-                .map(user -> UserDTO.builder()
-                        .id(user.getId())
-                        .username(user.getUsername())
-                        .password(user.getPassword())
-                        .email(user.getEmail())
-                        .role(user.getRole())
+    public Optional<LoginDto> login(String username, String password) {
+        return userRepository.findByEmailAndPassword(username, password)
+                .map(user -> LoginDto.builder()
+                        .password(password)
+                        .username(username)
                         .build());
     }
 
 
     @Transactional
-    public UserDTO register(UserDTO userDTO) {
-        User user = modelMapper.map(userDTO, User.class);
+    public UserCreateEditDto register(UserCreateEditDto userCreateEditDto) {
+        User user = modelMapper.map(userCreateEditDto, User.class);
         user = userRepository.save(user);
         return convertUserToUserDTO(user);
     }
 
 
-    public Optional<UserDTO> getById(Long userId) {
+    public Optional<UserReadDto> getById(Long userId) {
         Optional<User> user = userRepository.findById(userId);
         User user1 = user.get();
-        UserDTO userDTO = convertUserToUserDTO(user1);
-        return Optional.of(userDTO);
+        UserReadDto userReadDto = convertUserToUserDTO2(user1);
+        return Optional.of(userReadDto);
 
     }
 }

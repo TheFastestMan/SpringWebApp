@@ -1,10 +1,14 @@
 package ru.rail.springwebapp.dto;
 
-import lombok.Value;
+import lombok.*;
 import org.springframework.stereotype.Component;
-
-@Value
+@Builder
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginDto {
-    String username;
-    String password;
+   private String username;
+    private String password;
 }
