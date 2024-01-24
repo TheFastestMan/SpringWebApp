@@ -52,7 +52,7 @@ public class UserController {
                          @RequestParam("role") Role role,
                          @RequestParam("email") String email,
                          @RequestParam("password") String password,
-                         @RequestParam("companyId") Integer companyId) {
+                         @RequestParam("companyId") Long companyId) {
         UserCreateEditDto userCreateEditDto = UserCreateEditDto.builder()
                 .username(username)
                 .birthDate(birthDate)

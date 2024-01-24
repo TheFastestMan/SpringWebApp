@@ -20,5 +20,5 @@ public class UserCreateEditDto {
     private String password;
     private String lastname;
     private Role role;
-    private Integer companyId;
+    private Long companyId;
 }
