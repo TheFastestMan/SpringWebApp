@@ -31,10 +31,10 @@ public class LoginController {
                          @RequestParam("password") String password) {
         Optional<LoginDto> userDTO = userService.login(email, password);
 
-        if (userDTO.isPresent() && userDTO.get().getRole().equals("user")) {
+        if (userDTO.isPresent() && userDTO.get().getRole().equals(Role.USER)) {
             return "redirect:/users";
         }
-        if (userDTO.isPresent() && userDTO.get().getRole().equals("admin")) {
+        if (userDTO.isPresent() && userDTO.get().getRole().equals(Role.ADMIN)) {
             return "redirect:/user/" + userDTO.get().getId();
         } else
             return "web/login";
