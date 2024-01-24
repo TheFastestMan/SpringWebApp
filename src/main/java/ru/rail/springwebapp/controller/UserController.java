@@ -23,7 +23,7 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private final UserService userService;
-
+//ser
     @GetMapping("/users")
     public String users(Model model) {
         List<UserReadDto> users = userService.findAll();
