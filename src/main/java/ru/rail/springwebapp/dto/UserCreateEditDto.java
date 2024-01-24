@@ -16,6 +16,8 @@ public class UserCreateEditDto {
     private String username;
     private LocalDate birthDate;
     private String firstname;
+    private String email;
+    private String password;
     private String lastname;
     private Role role;
     private Integer companyId;

@@ -65,8 +65,10 @@ public class UserService {
     public Optional<LoginDto> login(String username, String password) {
         return userRepository.findByEmailAndPassword(username, password)
                 .map(user -> LoginDto.builder()
+                        .id(user.getId())
                         .password(password)
                         .username(username)
+                        .role(user.getRole())
                         .build());
     }
 

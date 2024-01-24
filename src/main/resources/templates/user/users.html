@@ -7,10 +7,9 @@
 <h2>Users List</h2>
 <table>
   <tbody>
-  <tr th:each="userrr : ${users}">
-    <td th:text="${userrr.username}">Username</td>
-    <td th:text="${userrr.password}">Password</td>
-    <td th:text="${userrr.email}">Email</td>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.username}">Username</td>
+    <td th:text="${user.email}">Email</td>
   </tr>
   </tbody>
 </table>

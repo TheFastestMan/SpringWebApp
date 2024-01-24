@@ -23,7 +23,8 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private final UserService userService;
-//ser
+
+    //ser
     @GetMapping("/users")
     public String users(Model model) {
         List<UserReadDto> users = userService.findAll();
@@ -49,13 +50,16 @@ public class UserController {
                          @RequestParam("firstname") String firstname,
                          @RequestParam("lastname") String lastname,
                          @RequestParam("role") Role role,
-                         @RequestParam("companyId") Integer companyId)
-                          {
+                         @RequestParam("email") String email,
+                         @RequestParam("password") String password,
+                         @RequestParam("companyId") Integer companyId) {
         UserCreateEditDto userCreateEditDto = UserCreateEditDto.builder()
                 .username(username)
                 .birthDate(birthDate)
                 .firstname(firstname)
                 .lastname(lastname)
+                .email(email)
+                .password(password)
                 .role(role)
                 .companyId(companyId)
                 .build();

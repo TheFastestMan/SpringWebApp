@@ -16,6 +16,7 @@ public class UserReadDto {
     private String username;
     private LocalDate birthDate;
     private String firstname;
+    private String email;
     private String lastname;
     private Role role;
    private CompanyReadDto company;

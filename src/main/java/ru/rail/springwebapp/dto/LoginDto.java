@@ -12,7 +12,7 @@ import ru.rail.springwebapp.entity.Role;
 @AllArgsConstructor
 public class LoginDto {
     private Long id;
-   private String username;
+    private String username;
     private String password;
     private Role role;
 }

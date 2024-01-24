@@ -2,9 +2,9 @@ package ru.rail.springwebapp.mapper;
 
 public interface Mapper<F, T> {
 
-     T map(F object);
+    T map(F object);
 
-     default T map(F fromObject, T toObject) {
-          return toObject;
-     }
+    default T map(F fromObject, T toObject) {
+        return toObject;
+    }
 }
