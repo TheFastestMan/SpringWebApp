@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -35,15 +36,22 @@
     <input name="password" type="text" id="password">
 
     <br>
+    <div th:each="role : ${roles}">
 
-    <label for="role">Role</label>
-    <input name="role" type="text" id="role">
+        <input th:id="${role}" type="radio" name="role" th:value="${role}" th:text="${role}">
+        <label th:for="${role}">Role</label>
 
+    </div>
     <br>
-
-    <label for="companyId">companyId</label>
-    <input name="companyId" type="text" id="companyId">
-
+    <div>
+        <label for="companyId">companyId</label>
+        <select id="companyId" name="companyId">
+            <option th:each="company : ${companies}"
+                    th:value="${company.id}"
+                    th:text="${company.name}">companyId
+            </option>
+        </select>
+    </div>
     <input type="submit" value="registration">
 
 </form>

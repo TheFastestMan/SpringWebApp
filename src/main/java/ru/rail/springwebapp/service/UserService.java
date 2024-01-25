@@ -73,7 +73,6 @@ public class UserService {
         } else {
             user.setCompany(null);
         }
-
         user = userRepository.save(user);
         return userCreateEditMapper.mapTo(user);
 
